@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SwaggerRequestExample.Request;
+using SwaggerRequestExample.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace SwaggerRequestExample.Controllers
@@ -34,6 +37,13 @@ namespace SwaggerRequestExample.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(SomeResponse), (int)HttpStatusCode.OK)]
+        public ActionResult<SomeResponse> Post([FromBody] SomeRequest req)
+        {
+            return Ok();
         }
     }
 }
